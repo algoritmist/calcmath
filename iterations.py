@@ -6,10 +6,10 @@ def solve(a, b, delta):
     alpha, beta = None, None
     if check(a):
         alpha, beta = to_iterative_form(a, b)
-    else:
-        if det(a) != 0:
-            a_transformed, b_transformed = transform(a, b)
-            alpha, beta = to_iterative_form(a_transformed, b_transformed)
+#    else:
+#        if det(a) != 0:
+#            a_transformed, b_transformed = transform(a, b)
+#           alpha, beta = to_iterative_form(a_transformed, b_transformed)
 
     #TODO: use Maybe
     if alpha is None or beta is None:
@@ -27,20 +27,20 @@ def to_iterative_form(a, b):
         diag2 = -const
         beta[i] = b[i] / diag1
         for j in range(len(a)):
-            alpha[i, j] = -diag2 / diag1 if i == j else -A[i, j] / diag1
+            alpha[i, j] = -diag2 / diag1 if i == j else -a[i, j] / diag1
     return alpha, beta
 
 
 # if det A != 0, try to get iterative form immediately
-def transform(a, b):
-    if det(a) == 0:
-        return a, b
-    mul = np.vectorize(lambda x: 1e-6 * x)
-    eps = mul(np.random.rand(len(a), len(a)))
-    inv = np.linalg.inv(a)
-    mult = np.add(inv, eps)
-    # TODO: try simplifying b multiplication
-    return np.matmul(mult, a), np.squeeze(np.asarray(np.matmul(mult, b)))
+#def transform(a, b):
+#    if det(a) == 0:
+#        return a, b
+#    mul = np.vectorize(lambda x: 1e-6 * x)
+#    eps = mul(np.random.rand(len(a), len(a)))
+#    inv = np.linalg.inv(a)
+#    mult = np.add(inv, eps)
+#    # TODO: try simplifying b multiplication
+#    return np.matmul(mult, a), np.squeeze(np.asarray(np.matmul(mult, b)))#
 
 
 # check if |Aii| > sum (Aij)
