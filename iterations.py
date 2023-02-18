@@ -1,5 +1,5 @@
 import numpy as np
-
+from fputils import Left, Right
 
 # solve Ax = b with the method of simple iterations
 def solve(a, b, delta):
@@ -13,8 +13,8 @@ def solve(a, b, delta):
 
     #TODO: use Maybe
     if alpha is None or beta is None:
-        return [], False
-    return steps(alpha, beta, delta), True
+        return Left("Система не удовлетворяет условию сходимости")
+    return Right(steps(alpha, beta, delta))
 
 
 # Ax = b => x = beta + alpha * x
@@ -69,11 +69,12 @@ def step(alpha, beta, xs, delta):
 
 def steps(alpha, beta, delta):
     x = beta  # initial iteration
-    #TODO: iteration count
+    iterations = 0
     while True:
         x, change = step(alpha, beta, x, delta)
+        iterations += 1
         if not change:
-            return x
+            return x, iterations
 
 
 # calculate the determinant of matrix
