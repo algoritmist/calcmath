@@ -7,4 +7,10 @@ from interaction import *
 # b = np.array([8, 9, 20])
 
 args = sys.argv
-print(get_info())
+if len(args) == 1:
+    print(get_info())
+    exit(0)
+
+mode = args[1]
+if mode == '-i':
+    run_interactive()
