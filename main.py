@@ -11,6 +11,10 @@ if len(args) == 1:
     print(get_info())
     exit(0)
 
-mode = args[1]
-if mode == '-i':
-    run_interactive()
+k = args[1]
+for key in keys:
+    if k == key[0]:
+        key[2]()
+        exit(0)
+print(f"key {k} not in list of avaliable keys:")
+print(keys_to_str())

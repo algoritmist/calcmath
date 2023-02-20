@@ -6,6 +6,7 @@ from iterations import solve
 
 from fputils import *
 
+
 def interactive_mode():
     print("Enter error: ")
     err = float(input())
@@ -34,8 +35,13 @@ def random_mode():
     pass
 
 
+def run_interactive():
+    while True:
+        interactive_mode()
+
+
 keys = [
-    ("-i", "interactive mode", interactive_mode),
+    ("-i", "interactive mode", run_interactive),
     ("-f", "file mode", file_mode),
     ("-r", "random generation mode (for testing)", random_mode)
 ]
@@ -53,7 +59,3 @@ def get_info():
     program_info = "MatrixSolver - the program that solves LES with the method of simple iterations"
     keys_info = "You can use the following keys to run the program:\n" + keys_to_str()
     return program_info + '\n' + keys_info
-
-def run_interactive():
-    while True:
-        interactive_mode()
