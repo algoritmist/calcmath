@@ -11,10 +11,8 @@ def solve(a, b, delta):
     #        if det(a) != 0:
     #            a_transformed, b_transformed = transform(a, b)
     #           alpha, beta = to_iterative_form(a_transformed, b_transformed)
-
-    # TODO: use Maybe
     if alpha is None or beta is None:
-        return Left("LES does not satisfy the convergence conditions")
+        return Left("LES does not satisfy the convergence condition")
     return Right(steps(alpha, beta, delta))
 
 

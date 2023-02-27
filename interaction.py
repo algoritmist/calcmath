@@ -5,6 +5,7 @@ import numpy as np
 from iterations import solve
 
 from fputils import *
+from random_generator import generate, generate_and_normalize
 
 
 def interactive_mode():
@@ -19,6 +20,9 @@ def interactive_mode():
         matrix[i] = list(map(float, input().split()))
         matrix[i], column[i] = matrix[i][:-1], matrix[i][-1]
 
+    solve_and_print(matrix, column, err)
+
+def solve_and_print(matrix, column, err):
     result = solve(np.asmatrix(matrix), np.asarray(column), err)
     if result.is_left():
         print(result.get_value())
@@ -26,13 +30,18 @@ def interactive_mode():
     x, iters = result.get_value()
     print(f"Solved in {iters} iterations\nx = {x}")
 
-
 def file_mode():
     pass
 
 
 def random_mode():
-    pass
+    matrix = generate_and_normalize(20)
+    column = np.random.rand(20)
+    print(f"A = {matrix}")
+    print(f"b = {column}")
+    err = 1e-6
+    print(f"Error: {err}")
+    solve_and_print(matrix, column, err)
 
 
 def run_interactive():
