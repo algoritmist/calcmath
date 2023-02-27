@@ -27,8 +27,7 @@ def solve(a, b, delta):
         transform(b, shuffle)
 
     alpha, beta = to_iterative_form(a_transformed, b_transformed)
-    x, iterations = steps(alpha, beta, delta)
-    return Right((x, iterations))
+    return Right(steps(alpha, beta, delta))
 
 
 def to_iterative_form(a, b):
