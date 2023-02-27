@@ -14,7 +14,7 @@ if len(args) == 1:
 k = args[1]
 for key in keys:
     if k == key[0]:
-        key[2]()
+        key[2](args[2:])
         exit(0)
 print(f"key {k} not in list of available keys:")
 print(keys_to_str())

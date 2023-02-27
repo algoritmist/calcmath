@@ -3,12 +3,10 @@ from functools import reduce
 import numpy as np
 
 from iterations import solve
-
-from fputils import *
-from random_generator import generate, generate_and_normalize
+from random_generator import generate_and_normalize
 
 
-def interactive_mode():
+def interactive_mode(args):
     print("Enter error: ")
     err = float(input())
     print("Enter matrix dimension: ")
@@ -22,6 +20,7 @@ def interactive_mode():
 
     solve_and_print(matrix, column, err)
 
+
 def solve_and_print(matrix, column, err):
     result = solve(np.asmatrix(matrix), np.asarray(column), err)
     if result.is_left():
@@ -30,23 +29,38 @@ def solve_and_print(matrix, column, err):
     x, iters = result.get_value()
     print(f"Solved in {iters} iterations\nx = {x}")
 
-def file_mode():
-    pass
+
+def file_mode(filenames):
+    for filename in filenames:
+        with open(filename, "r") as file:
+            err = float(file.readline())
+            n = int(file.readline())
+
+            matrix = [[] for i in range(n)]
+            column = [0 for i in range(n)]
+            for i in range(n):
+                matrix[i] = list(map(float, file.readline().split()))
+                matrix[i], column[i] = matrix[i][:-1], matrix[i][-1]
+
+            print(f"Error = {err}")
+            print(f"A = {matrix}")
+            print(f"b = {column}")
+            solve_and_print(matrix, column, err)
 
 
-def random_mode():
+def random_mode(args):
     matrix = generate_and_normalize(20)
     column = np.random.rand(20)
-    print(f"A = {matrix}")
-    print(f"b = {column}")
     err = 1e-6
     print(f"Error: {err}")
+    print(f"A = {matrix}")
+    print(f"b = {column}")
     solve_and_print(matrix, column, err)
 
 
-def run_interactive():
+def run_interactive(args):
     while True:
-        interactive_mode()
+        interactive_mode(args)
 
 
 keys = [
