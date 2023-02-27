@@ -16,5 +16,5 @@ for key in keys:
     if k == key[0]:
         key[2]()
         exit(0)
-print(f"key {k} not in list of avaliable keys:")
+print(f"key {k} not in list of available keys:")
 print(keys_to_str())
