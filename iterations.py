@@ -8,7 +8,8 @@ from scipy.sparse.csgraph import maximum_bipartite_matching
 def get_shuffled_row_convergence(a):
     rows = [[] for i in range(len(a))]
     for i in range(len(a)):
-        rows[i] = [1 if is_convergence_satisfied(a, i, j) else 0 for j in range(len(a))]
+        rows[i] = [1 if is_convergence_satisfied(a, i, j) \
+                       else 0 for j in range(len(a))]
     graph = csr_matrix(rows)
     perm = maximum_bipartite_matching(graph, perm_type='column')
     return perm
@@ -19,15 +20,13 @@ def transform(a, shuffle):
 
 
 def solve(a, b, delta):
-    alpha, beta = None, None
     shuffle = get_shuffled_row_convergence(a)
-    if shuffle is not None:
-        a_transformed, b_transformed = transform(a, shuffle), transform(b, shuffle)
-        alpha, beta = to_iterative_form(a_transformed, b_transformed)
-
-    if alpha is None or beta is None:
+    if -1 in shuffle:
         return Left("LES does not satisfy the convergence condition")
+    a_transformed, b_transformed = transform(a, shuffle), \
+        transform(b, shuffle)
 
+    alpha, beta = to_iterative_form(a_transformed, b_transformed)
     x, iterations = steps(alpha, beta, delta)
     return Right((x, iterations))
 
