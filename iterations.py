@@ -1,19 +1,39 @@
 import numpy as np
 from fputils import Left, Right
 
+from scipy.sparse import csr_matrix
+from scipy.sparse.csgraph import maximum_bipartite_matching
+
 
 # solve Ax = b with the method of simple iterations
+def get_shuffled_row_convergence(a):
+    rows = [[] for i in range(len(a))]
+    for i in range(len(a)):
+        rows[i] = [1 if is_convergence_satisfied(a, i, j) else 0 for j in range(len(a))]
+    graph = csr_matrix(rows)
+    perm = maximum_bipartite_matching(graph, perm_type='column')
+    return perm
+
+
+def transform(a, shuffle):
+    return a[shuffle]
+
+
 def solve(a, b, delta):
     alpha, beta = None, None
-    if is_has_convergence(a):
-        alpha, beta = to_iterative_form(a, b)
-    #    else:
-    #        if det(a) != 0:
-    #            a_transformed, b_transformed = transform(a, b)
-    #           alpha, beta = to_iterative_form(a_transformed, b_transformed)
+    # if is_has_convergence(a):
+    #    alpha, beta = to_iterative_form(a, b)
+    # else:
+    shuffle = get_shuffled_row_convergence(a)
+    if shuffle is not None:
+        a_transformed, b_transformed = transform(a, shuffle), transform(b, shuffle)
+        alpha, beta = to_iterative_form(a_transformed, b_transformed)
+
     if alpha is None or beta is None:
         return Left("LES does not satisfy the convergence condition")
-    return Right(steps(alpha, beta, delta))
+
+    x, iterations = steps(alpha, beta, delta)
+    return Right((x, iterations))
 
 
 # Ax = b => x = beta + alpha * x
@@ -47,10 +67,15 @@ def is_has_convergence(A):
     to_abs = np.vectorize(lambda x: abs(x))
     a = to_abs(A)
     for row in range(len(a)):
-        row_sum = np.sum(a[row])
-        if not (2 * a[row, row] > row_sum):
+        if not is_convergence_satisfied(a, row, row):
             return False
     return True
+
+
+def is_convergence_satisfied(a, i, j):
+    to_abs = np.vectorize(lambda x: abs(x))
+    matrix = to_abs(a)
+    return 2 * matrix[i, j] > np.sum(matrix[i])
 
 
 # calculate xs
