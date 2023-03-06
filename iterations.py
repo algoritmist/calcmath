@@ -53,7 +53,6 @@ def is_convergence_satisfied(a, i, j):
     return 2 * matrix[i, j] > np.sum(matrix[i])
 
 
-# calculate xs
 def step(alpha, beta, xs, delta):
     doubles = zip(alpha, beta)
     change = False

@@ -7,18 +7,22 @@ from random_generator import generate_and_normalize
 
 
 def interactive_mode(args):
-    print("Enter error: ")
-    err = float(input())
-    print("Enter matrix dimension: ")
-    n = int(input())
-    matrix = [[] for i in range(n)]
-    column = [0 for i in range(n)]
-    print("Enter matrix: ")
-    for i in range(n):
-        matrix[i] = list(map(float, input().split()))
-        matrix[i], column[i] = matrix[i][:-1], matrix[i][-1]
+    try:
+        print("Enter error: ")
+        err = float(input())
+        print("Enter matrix dimension: ")
+        n = int(input())
+        matrix = [[] for i in range(n)]
+        column = [0 for i in range(n)]
+        print("Enter matrix: ")
+        for i in range(n):
+            matrix[i] = list(map(float, input().split()))
+            matrix[i], column[i] = matrix[i][:-1], matrix[i][-1]
 
-    solve_and_print(matrix, column, err)
+        solve_and_print(matrix, column, err)
+    except Exception as ex:
+        print(ex.__str__())
+        print("Enter the equation again...")
 
 
 def solve_and_print(matrix, column, err):
@@ -32,20 +36,24 @@ def solve_and_print(matrix, column, err):
 
 def file_mode(filenames):
     for filename in filenames:
-        with open(filename, "r") as file:
-            err = float(file.readline())
-            n = int(file.readline())
+        try:
+            with open(filename, "r") as file:
+                err = float(file.readline())
+                n = int(file.readline())
 
-            matrix = [[] for i in range(n)]
-            column = [0 for i in range(n)]
-            for i in range(n):
-                matrix[i] = list(map(float, file.readline().split()))
-                matrix[i], column[i] = matrix[i][:-1], matrix[i][-1]
+                matrix = [[] for i in range(n)]
+                column = [0 for i in range(n)]
+                for i in range(n):
+                    matrix[i] = list(map(float, file.readline().split()))
+                    matrix[i], column[i] = matrix[i][:-1], matrix[i][-1]
 
-            print(f"Error = {err}")
-            print(f"A = {matrix}")
-            print(f"b = {column}")
-            solve_and_print(matrix, column, err)
+                print(f"Error = {err}")
+                print(f"A = {matrix}")
+                print(f"b = {column}")
+                solve_and_print(matrix, column, err)
+        except Exception as ex:
+            print("A problem occurred while solving equation")
+            print(ex.__str__())
 
 
 def random_mode(args):
