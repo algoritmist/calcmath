@@ -50,7 +50,7 @@ def is_has_convergence(matrix):
 def is_convergence_satisfied(a, i, j):
     to_abs = np.vectorize(lambda x: abs(x))
     matrix = to_abs(a)
-    return 2 * matrix[i, j] > np.sum(matrix[i])
+    return 2 * matrix[i, j] >= np.sum(matrix[i])
 
 
 def step(alpha, beta, xs, delta):

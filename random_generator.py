@@ -1,14 +1,13 @@
 import numpy as np
 
 
-def generate(n, m, multiper):
-    normalize = np.vectorize(lambda x: int(multiper * x))
+def generate(n, m, mult):
+    normalize = np.vectorize(lambda x: int(mult * x))
     return normalize(np.random.rand(n, m))
 
 
-def generate_and_normalize(n):
-    multiper = 1e2
-    mx = generate(n, n, multiper)
+def generate_and_normalize(n, mult=1e2):
+    mx = generate(n, n, mult)
     for i in range(n):
-        mx[i, i] += n * multiper
+        mx[i, i] += n * mult
     return mx

@@ -56,9 +56,9 @@ def file_mode(filenames):
             print(ex.__str__())
 
 
-def random_mode(args):
-    matrix = generate_and_normalize(20)
-    column = np.random.rand(20)
+def random_mode(args, n = 20):
+    matrix = generate_and_normalize(n)
+    column = np.random.rand(n)
     err = 1e-6
     print(f"Error: {err}")
     print(f"A = {matrix}")
