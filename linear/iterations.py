@@ -1,5 +1,5 @@
 import numpy as np
-from fputils import Left, Right
+from functional_progamming.fputils import Left, Right
 
 from scipy.sparse import csr_matrix
 from scipy.sparse.csgraph import maximum_bipartite_matching
