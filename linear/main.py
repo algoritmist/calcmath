@@ -1,5 +1,3 @@
-from iterations import solve
-import numpy as np
 import sys
 from interaction import *
 
