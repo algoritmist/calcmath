@@ -1,7 +1,8 @@
 import math
 
 from sympy import *
-from nonlinear.single.newton_solver import solve
+from nonlinear.single.newton_solver import solve as newton_solve
+from nonlinear.single.itearation_solver import solve as iteration_solve
 
 x = symbols('x')
 
@@ -11,4 +12,5 @@ equations = [
 
 
 def solve_equation(number):
-    return solve(lambdify(x, equations[number]), 1e-3, 1, 100)
+    return newton_solve(lambdify(x, equations[number]), 1e-3, 1, 1.5, 100), \
+        iteration_solve(lambdify(x, equations[number]), 1e-3, 1.2, 1.4, 100)

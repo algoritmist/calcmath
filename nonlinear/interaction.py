@@ -22,8 +22,10 @@ def get_system_number():
     for i, system in enumerate(systems):
         print(f"{i + 1}. {system}")
 
+
 def show_result(result):
-    print(result)
+    print(result[0])
+    print(result[1])
 
 
 def show_error_message():
