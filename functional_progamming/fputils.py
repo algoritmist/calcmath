@@ -26,6 +26,9 @@ class Left(Either):
     def is_right(self):
         return False
 
+    def __str__(self):
+        return "Left(" + str(self.left_value) + ")"
+
 
 class Right(Either):
     def __init__(self, right_value):
@@ -39,3 +42,6 @@ class Right(Either):
 
     def is_right(self):
         return True
+
+    def __str__(self):
+        return "Right(" + str(self.right_value) + ")"

@@ -11,37 +11,38 @@ def get_equation_number():
     from single.default_equations import equations
     print("Choose one of the following equations:")
     for i, eq in enumerate(equations):
+        # TODO: pretty print
         print(f"{i + 1}. {eq}")
     return int(input("Enter number of equation: "))
+
 
 def get_system_number():
     from equaction_system.default_systems import systems
     print("Choose one of the following systems")
     for i, system in enumerate(systems):
-        print(f"{i+1}. {system}")
-
-def solve_equation(number):
-    pass
+        print(f"{i + 1}. {system}")
 
 def show_result(result):
-    pass
+    print(result)
 
-def solve_equation_system(number):
-    pass
 
 def show_error_message():
     pass
+
+
 def run():
     print(program_info())
     choise = get_type_number()
     if choise == 1:
         equation_number = get_equation_number()
-        result = solve_equation(equation_number)
+        from single.default_equations import solve_equation
+        result = solve_equation(equation_number - 1)
         show_result(result)
         return
     if choise == 2:
-        equation_system_number = get_system_number()
-        result = solve_equation_system(equation_system_number)
+        system_number = get_system_number()
+        from equaction_system.default_systems import solve_system
+        result = solve_system(system_number - 1)
         show_result(result)
         return
     show_error_message()
