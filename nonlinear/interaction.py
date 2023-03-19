@@ -18,9 +18,10 @@ def get_equation_number():
 
 def get_system_number():
     from equaction_system.default_systems import systems
-    print("Choose one of the following systems")
+    print("Choose one of the following systems:")
     for i, system in enumerate(systems):
         print(f"{i + 1}. {system}")
+    return int(input("Enter number of system: "))
 
 
 def show_result(result):
@@ -32,19 +33,39 @@ def show_error_message():
     pass
 
 
+def get_error():
+    return float(input("Enter error: "))
+
+
+def get_range(variable_name):
+    print(f"Enter range for {variable_name}: ")
+    a = float(input("l = "))
+    b = float(input("r = "))
+    return a, b
+
+def get_ranges(free_variables):
+    lst = []
+    for variable in free_variables:
+        lst.append(get_range(variable))
+    return lst
 def run():
     print(program_info())
+    err = get_error()
     choise = get_type_number()
     if choise == 1:
         equation_number = get_equation_number()
         from single.default_equations import solve_equation
-        result = solve_equation(equation_number - 1)
+        a, b = get_range()
+        result = solve_equation(equation_number - 1, a, b, err)
         show_result(result)
         return
     if choise == 2:
         system_number = get_system_number()
-        from equaction_system.default_systems import solve_system
-        result = solve_system(system_number - 1)
-        show_result(result)
+        from equaction_system.default_systems import solve_system, free_variables
+        #print(free_variables(system_number - 1))
+        ranges = get_ranges(free_variables(system_number - 1))
+        print(ranges)
+        #result = solve_system(system_number - 1, ranges, err)
+        #show_result(result)
         return
     show_error_message()
