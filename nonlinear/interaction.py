@@ -23,15 +23,20 @@ def get_system_number():
         print(f"{i + 1}. {system}")
     return int(input("Enter number of system: "))
 
+
 def show_result(result):
-    print(result)
+    if result.is_right():
+        x, steps = result.get_value()
+        print(f"Solved in {steps} steps...")
+        print(f"x = {x}")
+    else:
+        message = result.get_value()
+        print(message)
+
+
 def show_results(results):
     for result in results:
         show_result(result)
-
-
-def show_error_message():
-    pass
 
 
 def get_error():
@@ -44,28 +49,36 @@ def get_range(variable_name):
     b = float(input("r = "))
     return a, b
 
+
 def get_ranges(free_variables):
     lst = []
     for variable in free_variables:
         lst.append(get_range(variable))
     return lst
+
+
 def run():
     print(program_info())
-    err = get_error()
-    choise = get_type_number()
-    if choise == 1:
-        equation_number = get_equation_number()
-        from single.default_equations import solve_equation
-        a, b = get_range('x')
-        results = solve_equation(equation_number - 1, a, b, err)
-        show_results(results)
-        return
-    if choise == 2:
-        system_number = get_system_number()
-        from equaction_system.default_systems import solve_system, free_variables
-        #print(free_variables(system_number - 1))
-        ranges = get_ranges(free_variables(system_number - 1))
-        result = solve_system(system_number - 1, ranges, err)
-        show_result(result)
-        return
-    show_error_message()
+    while True:
+        try:
+            err = get_error()
+            choise = get_type_number()
+            if choise == 1:
+                equation_number = get_equation_number()
+                from single.default_equations import solve_equation
+                a, b = get_range('x')
+                results = solve_equation(equation_number - 1, a, b, err)
+                show_results(results)
+                continue
+            if choise == 2:
+                system_number = get_system_number()
+                from equaction_system.default_systems import solve_system, free_variables
+                # print(free_variables(system_number - 1))
+                ranges = get_ranges(free_variables(system_number - 1))
+                result = solve_system(system_number - 1, ranges, err)
+                show_result(result)
+                continue
+            raise Exception("Choose 1 or 2")
+        except Exception as ex:
+            print("A problem occurred")
+            print(ex)
