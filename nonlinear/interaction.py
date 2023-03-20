@@ -23,10 +23,11 @@ def get_system_number():
         print(f"{i + 1}. {system}")
     return int(input("Enter number of system: "))
 
-
 def show_result(result):
-    print(result[0])
-    print(result[1])
+    print(result)
+def show_results(results):
+    for result in results:
+        show_result(result)
 
 
 def show_error_message():
@@ -55,17 +56,16 @@ def run():
     if choise == 1:
         equation_number = get_equation_number()
         from single.default_equations import solve_equation
-        a, b = get_range()
-        result = solve_equation(equation_number - 1, a, b, err)
-        show_result(result)
+        a, b = get_range('x')
+        results = solve_equation(equation_number - 1, a, b, err)
+        show_results(results)
         return
     if choise == 2:
         system_number = get_system_number()
         from equaction_system.default_systems import solve_system, free_variables
         #print(free_variables(system_number - 1))
         ranges = get_ranges(free_variables(system_number - 1))
-        print(ranges)
-        #result = solve_system(system_number - 1, ranges, err)
-        #show_result(result)
+        result = solve_system(system_number - 1, ranges, err)
+        show_result(result)
         return
     show_error_message()
