@@ -15,7 +15,10 @@ def solve(f, eps, a, b, max_iters):
         return solve(f, eps, x0, b, max_iters)
 
     for i in range(max_iters):
-        x = x0 - f(x0) / derivative(f, x0)
+        der = derivative(f, x0)
+        if der == 0:
+            return Left(f"System has more than one solution on [{a};{b}], choose a more concrete range")
+        x = x0 - f(x0) / der
         if is_stop_condition_satisfied(f, x, x0, eps):
             return Right((x, i + 1))
         x0 = x
