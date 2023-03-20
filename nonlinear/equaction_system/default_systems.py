@@ -10,7 +10,7 @@ def solve_system(number, ranges, err):
     system = systems[number]
     variables = free_variables(number)
     from nonlinear.equaction_system.solver import solve
-    return "Iterations method", solve(Matrix(system), variables, ranges, err, 10)
+    return "Iterations method", solve(Matrix(system), variables, ranges, err, 100)
 
 
 def free_variables(number):

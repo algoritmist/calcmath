@@ -7,17 +7,11 @@ def solve(f, eps, a, b, max_iters):
     if f(a) * f(b) > 0:
         return Left(f"System doesn't have a solution on [{a};{b}]")
 
-    x0 = (a + b) / 2
-    if derivative(f, x0) == 0:
-        res = solve(f, eps, a, x0, max_iters)
-        if res.is_right():
-            return res
-        return solve(f, eps, x0, b, max_iters)
-
+    x0 = a if derivative(f, a) != 0 else b
     for i in range(max_iters):
         der = derivative(f, x0)
         if der == 0:
-            return Left(f"System has more than one solution on [{a};{b}], choose a more concrete range")
+            return Left("Specify a more concrete range")
         x = x0 - f(x0) / der
         if is_stop_condition_satisfied(f, x, x0, eps):
             return Right((x, i + 1))
