@@ -59,6 +59,7 @@ def get_ranges(free_variables):
 
 
 def run():
+    #TODO: check ODZ
     print(program_info())
     while True:
         try:

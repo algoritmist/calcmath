@@ -12,6 +12,9 @@ def solve(f, eps, a, b, max_iters):
         return Left("Specify a more concrete range")
 
     l, x0 = (-1 / da, a) if da > db else (-1 / db, b)
+    der = 1 + l * derivative(f, x0)
+    if not 0 <= der < 1:
+        return Left("Convergence condition not satisfied")
     for i in range(max_iters):
         x = x0 + l * f(x0)
         if abs(x - x0) < eps:

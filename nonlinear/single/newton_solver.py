@@ -7,7 +7,7 @@ def solve(f, eps, a, b, max_iters):
     if f(a) * f(b) > 0:
         return Left(f"System doesn't have a solution on [{a};{b}]")
 
-    x0 = a if derivative(f, a) != 0 else b
+    x0 = a if derivative(f, x0=a, n=2) * f(a) > 0 else b
     for i in range(max_iters):
         der = derivative(f, x0)
         if der == 0:
