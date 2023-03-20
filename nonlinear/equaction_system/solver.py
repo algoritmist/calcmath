@@ -5,8 +5,11 @@ from functional_progamming.fputils import Right, Left
 
 def solve(f, variables, ranges, err, max_iters):
     x0 = Matrix([r[1] for r in ranges])
+    W = -f.jacobian(variables)
+    if det(W) == 0:
+        return Left("System can't be solved with method of iterations")
     for i in range(max_iters):
-        L = -f.jacobian(variables).inv().subs(zip(variables, x0))
+        L = W.inv().subs(zip(variables, x0))
         x = x0 + L * f.subs(zip(variables, x0))
         if max(abs(x - x0)) < err:
             return Right((list(x), i + 1))
