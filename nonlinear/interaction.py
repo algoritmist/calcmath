@@ -24,7 +24,10 @@ def get_system_number():
     return int(input("Enter number of system: "))
 
 
-def show_result(result):
+def show_result(method_result):
+    method = method_result[0]
+    result = method_result[1]
+    print(method)
     if result.is_right():
         x, steps = result.get_value()
         print(f"Solved in {steps} steps...")
@@ -51,9 +54,7 @@ def get_range(variable_name):
 
 
 def get_ranges(free_variables):
-    lst = []
-    for variable in free_variables:
-        lst.append(get_range(variable))
+    lst = [get_range(variable) for variable in free_variables]
     return lst
 
 

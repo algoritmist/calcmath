@@ -12,5 +12,5 @@ equations = [
 
 
 def solve_equation(number, a, b, err):
-    return newton_solve(lambdify(x, equations[number]), err, a, b, 100), \
-        iteration_solve(lambdify(x, equations[number]), err, a, b, 100)
+    return ("Newton method", newton_solve(lambdify(x, equations[number]), err, a, b, 100)), \
+        ("Iterations method", iteration_solve(lambdify(x, equations[number]), err, a, b, 100))
