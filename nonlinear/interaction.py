@@ -82,5 +82,6 @@ def run():
                 continue
             raise Exception("Choose 1 or 2")
         except Exception as ex:
+            pass
             print("A problem occurred")
             print(ex)
