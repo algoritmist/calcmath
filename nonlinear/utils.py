@@ -6,6 +6,8 @@ def show_result(method_result, precision=6):
         xs, steps = result.get_value()
         print(f"Solved in {steps} steps...")
         xs = list(map(lambda x: round(x, precision), xs))
+        if len(xs) == 1:
+            xs = xs[0]
         print(f"x = {xs}")
     else:
         message = result.get_value()
