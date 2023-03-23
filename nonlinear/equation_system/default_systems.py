@@ -17,12 +17,19 @@ systems = [
 ]
 
 
-# ranges = [[0, 1], [0, 1]], [[0,1] * 3]
+test_ranges = [
+    [
+        (0, 1), (0, 1)
+    ],
+    [
+        (0, 1), (0, 1), (0, 1)
+    ]
+]
 
 def solve_system(number, ranges, err, max_iters=100):
     system = systems[number]
     variables = free_variables(number)
-    from nonlinear.equaction_system.solver import solve
+    from nonlinear.equation_system.solver import solve
     return "Iterations method", solve(Matrix(system), variables, ranges, err, max_iters)
 
 

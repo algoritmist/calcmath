@@ -14,7 +14,7 @@ def solve(f, eps, a, b, max_iters):
             return Left("Specify a more concrete range")
         x = x0 - f(x0) / der
         if is_stop_condition_satisfied(f, x, x0, eps):
-            return Right((x, i + 1))
+            return Right(([x], i + 1))
         x0 = x
     return Left("The equation cant be solved" ""
                 f" in {max_iters} iterations")

@@ -1,3 +1,6 @@
+from nonlinear.utils import *
+
+
 def program_info():
     return "This program solves non-lenear equations and non-lenear eqaution systems"
 
@@ -8,7 +11,7 @@ def get_type_number():
 
 
 def get_equation_number():
-    from single.default_equations import equations
+    from nonlinear.single.default_equations import equations
     print("Choose one of the following equations:")
     for i, eq in enumerate(equations):
         # TODO: pretty print
@@ -17,29 +20,11 @@ def get_equation_number():
 
 
 def get_system_number():
-    from equaction_system.default_systems import systems
+    from nonlinear.equation_system.default_systems import systems
     print("Choose one of the following systems:")
     for i, system in enumerate(systems):
         print(f"{i + 1}. {system}")
     return int(input("Enter number of system: "))
-
-
-def show_result(method_result):
-    method = method_result[0]
-    result = method_result[1]
-    print(method)
-    if result.is_right():
-        x, steps = result.get_value()
-        print(f"Solved in {steps} steps...")
-        print(f"x = {x}")
-    else:
-        message = result.get_value()
-        print(message)
-
-
-def show_results(results):
-    for result in results:
-        show_result(result)
 
 
 def get_error():
@@ -59,7 +44,6 @@ def get_ranges(free_variables):
 
 
 def run():
-    #TODO: check ODZ
     print(program_info())
     while True:
         try:
@@ -67,14 +51,14 @@ def run():
             choise = get_type_number()
             if choise == 1:
                 equation_number = get_equation_number()
-                from single.default_equations import solve_equation
+                from nonlinear.single.default_equations import solve_equation
                 a, b = get_range('x')
                 results = solve_equation(equation_number - 1, a, b, err)
                 show_results(results)
                 continue
             if choise == 2:
                 system_number = get_system_number()
-                from equaction_system.default_systems import solve_system, free_variables
+                from nonlinear.equation_system.default_systems import solve_system, free_variables
                 # print(free_variables(system_number - 1))
                 ranges = get_ranges(free_variables(system_number - 1))
                 result = solve_system(system_number - 1, ranges, err)

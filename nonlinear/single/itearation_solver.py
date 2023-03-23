@@ -18,7 +18,7 @@ def solve(f, eps, a, b, max_iters):
     for i in range(max_iters):
         x = x0 + l * f(x0)
         if abs(x - x0) < eps:
-            return Right((x, i + 1))
+            return Right(([x], i + 1))
         x0 = x
     return Left("The equation cant be solved" ""
                 f" in {max_iters} iterations")

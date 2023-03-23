@@ -15,12 +15,10 @@ equations = [
     sqrt(x) - x
 ]
 
+test_ranges = [(-2, 1), (1, 4), (0.5, 2), (0, 2)]
 
-# ranges = [-2, 1], [1, 4]
 
 def solve_equation(number, a, b, err, max_iters=100):
     eq = lambdify(x, equations[number])
     return ("Newton's method", newton_solve(eq, err, a, b, max_iters)), \
         ("Iterations method", iteration_solve(eq, err, a, b, max_iters))
-
-# TODO: 1. ОДЗ, 2. Тесты, 3. Отчет
