@@ -1,6 +1,3 @@
-from enum import Enum
-
-
 class Break:
     inf = 1e64
 
@@ -15,3 +12,9 @@ class Break:
         if abs(f(x + eps) - f(x - eps)) > eps:
             return True
         return False
+
+    def __str__(self):
+        break_type = "an unresolvable" if self.is_unresolvable() \
+            else "a resolvable"
+
+        return f"Function has {break_type} break at {self.x}"
