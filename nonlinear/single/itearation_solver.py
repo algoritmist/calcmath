@@ -11,7 +11,7 @@ def solve(f, eps, a, b, max_iters):
     if da == 0 and db == 0:
         return Left("Specify a more concrete range")
 
-    l, x0 = (-1 / da, f(a)) if da > db and da != 0 else (-1 / db, f(b))
+    l, x0 = (-1 / da, a) if da > db and da != 0 else (-1 / db, b)
     der = 1 + l * derivative(f, x0)
     if not 0 <= der < 1:
         return Left("Convergence condition not satisfied")

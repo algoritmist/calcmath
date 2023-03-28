@@ -13,9 +13,9 @@ def solve(f, eps, a, b, max_iters):
 
     x0 = None
     if derivative(f, x0=a, n=2) * f(a) > 0:
-        x0 = f(a)
+        x0 = a
     elif derivative(f, x0=a, n=2) * f(b) > 0:
-        x0 = f(b)
+        x0 = b
     if x0 is None:
         return Left("Cant find a good approximation, specify a more concrete range")
     for i in range(max_iters):

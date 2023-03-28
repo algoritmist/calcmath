@@ -7,7 +7,7 @@ test_iters = 100
 
 def test():
     for i, (a, b) in enumerate(test_ranges):
-        print(f"{equations[i]} = 0")
+        print(f"{equations[i]}")
         print(f"Range [{a};{b}]")
         results = solve_equation(i, a, b, test_err, test_iters)
         show_results(results)

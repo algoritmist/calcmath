@@ -8,6 +8,6 @@ test_iters = 100
 def test():
     for i, ranges in enumerate(test_ranges):
         result = solve_system(i, ranges, test_err, test_iters)
-        print(f"{systems[i]} = 0")
+        print(f"{systems[i]}")
         show_result(result)
         print("-" * 20)

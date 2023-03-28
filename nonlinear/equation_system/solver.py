@@ -15,7 +15,7 @@ def solve(f, variables, ranges, err, max_iters):
         return Left("Specify more concrete ranges for the system")
 
     W_inv = -W.inv()
-    x0 = f.subs(zip(variables, x0_0))
+    x0 = x0_1
 
     for i in range(max_iters):
         L = W_inv.subs(zip(variables, x0))

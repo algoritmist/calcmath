@@ -15,7 +15,7 @@ equations = [
     sqrt(x) - x
 ]
 
-test_ranges = [(-2, 1), (1, 4), (0.5, 2), (0, 2)]
+test_ranges = [(-2, 1), (-2, 1), (0.5, 2), (0, 2)]
 
 
 def solve_equation(number, a, b, err, max_iters=100):
