@@ -1,10 +1,10 @@
 from sympy import lambdify
 
 from functional_progamming.fputils import Either, Right
-from integrals.simpson.integral import Integral
+from integrals.classes.integral import Integral
 
 
-def calculate(integral: Integral, steps: int) -> Either:
+def calculate(integral: Integral, resolver: Resolver, steps: int) -> Either:
     f, (a, b) = lambdify('x', integral.formula), integral.ranges
 
     h = (b - a) / steps

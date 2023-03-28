@@ -1,7 +1,7 @@
 from sympy import *
 
 from functional_progamming.fputils import Left, Right
-from integrals.simpson.integral import Integral
+from integrals.classes.integral import Integral
 
 x = symbols('x')
 
