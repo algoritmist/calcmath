@@ -7,11 +7,5 @@ class Integral:
         self.ranges = ranges
         self.newton_leibniz_answer = newton_leibniz_answer
 
-    def calculate(self):
-        pass
-
-    def get_error(self):
-        return self.newton_leibniz_answer - self.calculate()
-
     def __str__(self):
         return f"Integral({self.formula}, {self.ranges}, {self.newton_leibniz_answer})"
