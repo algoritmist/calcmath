@@ -2,7 +2,6 @@ import math
 
 from sympy import *
 
-from functional_progamming.fputils import Left
 from nonlinear.single.newton_solver import solve as newton_solve
 from nonlinear.single.itearation_solver import solve as iteration_solve
 
