@@ -8,4 +8,4 @@ class Integral:
         self.newton_leibniz_answer = newton_leibniz_answer
 
     def __str__(self):
-        return f"Integral({self.formula}, {self.ranges}, {self.newton_leibniz_answer})"
+        return f"Integral({self.formula}, {self.ranges})"
