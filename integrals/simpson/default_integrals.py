@@ -11,5 +11,6 @@ integrals = [
     Integral((3 * x - 1) / sqrt(2 * x ** 2 - x + 1), (-5, 10), Right(8.4176339772)),
     Integral(1 / x, (-2, 2), Left("No solution")),
     Integral(sin(x) / x, (-2, 2), Left("No solution")),
-    Integral(exp(-x ** 2), (0, 1), Right(0.7468))
+    Integral(exp(-x ** 2), (0, 1), Right(0.7468)),
+    Integral(1 / x + 1 / (x + 1), (-2, 2), Left("No solution")),
 ]
