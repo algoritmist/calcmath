@@ -5,7 +5,7 @@ class Break:
         self.f = f
         self.x = x
 
-    def is_unresolvable(self, eps=1e-9):
+    def is_unresolvable(self, eps=1e-6):
         f, x = self.f, self.x
         if max(abs(f(x - eps)), abs(f(x + eps))) > self.inf:
             return True

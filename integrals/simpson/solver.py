@@ -1,4 +1,6 @@
-from sympy import lambdify
+from math import isnan
+
+from sympy import lambdify, nan
 
 from functional_progamming.fputils import Either, Right, Left
 from integrals.classes.integral import Integral
@@ -18,6 +20,9 @@ def calculate(integral: Integral, steps: int, method: MethodType) -> Either:
     r1 = resolve(p1, method)
     r2 = resolve(p2, method)
     r3 = resolve(p3, method)
+    #print(r1)
+    #print(r2)
+    #print(r3)
 
     errors = []
     if r1.is_left():
@@ -32,16 +37,15 @@ def calculate(integral: Integral, steps: int, method: MethodType) -> Either:
 
     s1, s2, s3 = r1.get_value(), r2.get_value(), r3.get_value()
 
+    #print(s1, s2, s3)
+
     return Right(h / 6 * (sum(s1) + 2 * sum(s2) + 4 * sum(s3)))
 
 
 def get_value(f, x):
     try:
+        # TODO: what to do with nans?
+        # Idea: nan = 0
         return Right(f(x))
     except Exception:
         return Left(Break(f, x))
-
-
-def get_error(self):
-    pass
-    return self.newton_leibniz_answer - self.calculate()

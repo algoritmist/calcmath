@@ -1,5 +1,6 @@
 from nonlinear.utils import *
 
+
 def program_info():
     return "This program solves non-lenear equations and non-lenear eqaution systems"
 
