@@ -11,7 +11,7 @@ equations = [
     x ** 3 - x + 4,
     0.4 * x ** 3 - 2.5 * x ** 2 + 0.5 * x + 7,
     1 / sqrt(x) - x,
-    sqrt(x) - x
+    sqrt(x) - x,
 ]
 
 test_ranges = [(-2, 1), (-2, 1), (0.5, 2), (0, 2)]

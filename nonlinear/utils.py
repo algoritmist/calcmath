@@ -10,7 +10,7 @@ def show_result(method_result, precision=6):
             xs = xs[0]
         print(f"x = {xs}")
     else:
-        message = result.get_value()
+        message = result.get_error()
         print(message)
 
 

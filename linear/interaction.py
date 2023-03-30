@@ -28,7 +28,7 @@ def interactive_mode(args):
 def solve_and_print(matrix, column, err):
     result = solve(np.asmatrix(matrix), np.asarray(column), err)
     if result.is_left():
-        print(result.get_value())
+        print(result.get_error())
         return
     x, iters = result.get_value()
     print(f"Solved in {iters} iterations\nx = {x}")
