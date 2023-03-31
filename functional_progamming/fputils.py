@@ -18,10 +18,6 @@ class Either:
     def is_right(self):
         pass
 
-    @staticmethod
-    def chain(xs):
-        pass
-
 
 class LeftValueException(Exception):
     def __init__(self, message="Trying to get value from Left"):
@@ -47,10 +43,6 @@ class Left(Either):
 
     def __str__(self):
         return "Left(" + str(self.left_value) + ")"
-
-    @staticmethod
-    def chain(xs: List[Either]):
-        return Left(list(map(lambda x: x.get_error(), xs)))
 
 
 class RightErrorException(Exception):
@@ -78,6 +70,10 @@ class Right(Either):
     def __str__(self):
         return "Right(" + str(self.right_value) + ")"
 
-    @staticmethod
-    def chain(xs: List[Either]):
-        return Right(list(map(lambda x: x.get_value(), xs)))
+
+def left_chain(xs: List[Left]):
+    return Left(list(map(lambda x: x.get_error(), xs)))
+
+
+def right_chain(xs: List[Right]):
+    return Right(list(map(lambda x: x.get_value(), xs)))

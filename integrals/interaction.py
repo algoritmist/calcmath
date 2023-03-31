@@ -10,7 +10,7 @@ def program_info():
 
 def get_integral():
     from integrals.simpson.default_integrals import integrals
-    print("Choose one of the following equations:")
+    print("Choose one of the following integrals:")
     for i, integral in enumerate(integrals):
         # TODO: pretty print
         print(f"{i + 1}. {integral}")

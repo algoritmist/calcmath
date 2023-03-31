@@ -1,8 +1,9 @@
 from enum import Enum
 
+from functional_progamming.fputils import Left, Either, Right
 from integrals.classes.breaks import Break
 
-
+inf = 1e18
 class MethodType(Enum):
     LEFT = 1
     RIGHT = 2
@@ -27,12 +28,21 @@ def get_method(x):
         print("Enter value between 1 and 3:")
 
 
-def resolve(function_brake: Break, method_type: MethodType, eps=1e-6):
-    f, x = function_brake.f, function_brake.x
+def is_unresolvable(f, x, eps):
+    if max(abs(f(x - eps)), abs(f(x + eps))) > inf:
+        return True
+    if abs(f(x + eps) - f(x - eps)) > eps:
+        return True
+    return False
+
+
+def resolve(f, x, method_type: MethodType, eps) -> Either:
+    if is_unresolvable(f, x, eps):
+        return Left(f"Unresolvable break at point {x}")
     if method_type is MethodType.INTERACTIVE:
         method_type = get_method(x)
     if method_type is MethodType.LEFT:
-        return f(x - eps)
+        return Right(f(x - eps))
     if method_type is MethodType.RIGHT:
-        return f(x + eps)
-    return (f(x - eps) + f(x + eps)) / 2
+        return Right(f(x + eps))
+    return Right((f(x - eps) + f(x + eps)) / 2)
