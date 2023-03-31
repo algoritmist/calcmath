@@ -11,5 +11,5 @@ class Integral:
         self.expected_answer = expected_answer
 
     def __str__(self):
-        return f"Integral({self.function}, {self.ranges})"
+        return f"Integral({self.function})"
 

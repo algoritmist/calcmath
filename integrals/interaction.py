@@ -25,6 +25,13 @@ def get_steps():
     return int(input("Enter number of steps: "))
 
 
+def get_ranges():
+    print(f"Enter range for integral: ")
+    a = float(input("l = "))
+    b = float(input("r = "))
+    return a, b
+
+
 def run():
     print(program_info())
     while True:
@@ -33,5 +40,6 @@ def run():
             print(res.get_error())
             continue
         integral = res.get_value()
+        integral.ranges = get_ranges()
         steps = get_steps()
         print(show_result(calculate(integral, steps, MethodType.INTERACTIVE)))
