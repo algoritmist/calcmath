@@ -5,7 +5,8 @@ from integrals.classes.integral import Integral
 from integrals.classes.methods import MethodType, resolve
 
 
-def calculate(integral: Integral, n: int, method: MethodType, eps=1e-3) -> Either:
+def calculate(integral: Integral, n: int, method: MethodType, eps=1e-3) \
+        -> Either:
     resolve_breakpoints(integral, method, eps)
     if len(integral.unresolvable) != 0:
         return left_chain(integral.unresolvable)
@@ -17,8 +18,10 @@ def calculate(integral: Integral, n: int, method: MethodType, eps=1e-3) -> Eithe
 
     return Right(h / 3 *
                  (f(integral, a, eps) + f(integral, b, eps) +
-                  4 * sum([f(integral, a + i * h, eps) for i in range(1, 2 * m, 2)]) +
-                  2 * sum([f(integral, a + i * h, eps) for i in range(2, 2 * m, 2)])))
+                  4 * sum([f(integral, a + i * h, eps)
+                           for i in range(1, 2 * m, 2)]) +
+                  2 * sum([f(integral, a + i * h, eps)
+                           for i in range(2, 2 * m, 2)])))
 
 
 def f(integral, x, eps):
