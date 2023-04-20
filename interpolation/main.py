@@ -1,4 +1,4 @@
-from integrals.interaction import run
+from interpolation.interaction import run
 import warnings
 
 warnings.filterwarnings("ignore")
