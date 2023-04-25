@@ -1,12 +1,10 @@
 import sys
 from interaction import *
 
-args = sys.argv
-if len(args) == 1:
-    print(get_info())
-    exit(0)
-
-k = args[1]
+print("Choose mode from list below:")
+print(keys_to_str())
+args = input().split()
+k = args[0]
 for key in keys:
     if k == key[0]:
         key[2](args[2:])
