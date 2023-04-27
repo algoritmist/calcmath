@@ -13,7 +13,7 @@ functions = [
     # ),
     Function(
         sin(x),
-        cos(x) + C
+        -cos(x) + C
     ),
     Function(
         (x + y) / 2,
@@ -32,3 +32,11 @@ functions = [
         C
     )
 ]
+
+
+def calculate_const(f, _x, _y):
+    cs = solve(f.subs(x, _x), C)
+    if len(cs) == 0:
+        raise Exception("Condition can't be satisfied")
+    c = solve(f.subs(x, _x), C)[0] + _y
+    return f.subs(C, c)

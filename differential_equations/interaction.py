@@ -1,3 +1,8 @@
+from differential_equations.euler.default_functions import *
+import differential_equations.plots.plot as plt
+import differential_equations.euler.solver as solver
+
+
 def get_error():
     print("Enter error:")
     return float(input())
@@ -12,7 +17,7 @@ def get_ranges():
 
 def get_function():
     print("Choose function from list above")
-    from differential_equations.euler.default_functions import functions
+
     for i, f in enumerate(functions):
         print(f"{i + 1}. y' = {f}")
     i = int(input())
@@ -30,20 +35,22 @@ def program_info():
     return "This program solves differential equations"
 
 
-import differential_equations.plots.plot as plt
-from differential_equations.euler.solver import solve
-
-
 def run():
     print(program_info())
     while True:
-        try:
-            err = get_error()
-            fun = get_function()
-            a, b = get_ranges()
-            y_a = get_condition(a)
-
-            x_euler, y_euler = solve(fun.test, a, b, a, y_a, err)
-            plt.plot(fun.solved, a, b, x_euler, y_euler)
-        except Exception as ex:
-            print(ex.__str__())
+        # try:
+        err = get_error()
+        fun = get_function()
+        a, b = get_ranges()
+        y_a = get_condition(a)
+        fun = Function(
+            fun.test, calculate_const(fun.solved, a, y_a)
+        )
+        print(fun)
+        # TODO: replace const
+        x_euler, y_euler = solver.solve(fun.test, a, b, a, y_a, err, 0.2)
+        print(x_euler)
+        print(y_euler)
+        plt.plot(lambdify('x', fun.solved), a, b, x_euler, y_euler)
+    # except Exception as ex:
+    #    print(ex.__str__())
