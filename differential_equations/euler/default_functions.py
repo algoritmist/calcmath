@@ -2,7 +2,7 @@ from collections import namedtuple
 from sympy import *
 from sympy.abc import x, y
 
-C = symbols('C')
+c = symbols('c')
 
 Function = namedtuple('Function', 'test solved')
 
@@ -12,31 +12,31 @@ functions = [
     #    C * exp(-2 * pi) + x ** 2 / 2 - x / 2 + 1 / 4
     # ),
     Function(
-        sin(x),
-        -cos(x) + C
+        Add(sin(x), 0 * y),
+        -cos(x) + c
     ),
     Function(
         (x + y) / 2,
-        C * exp(x / 2) - x - 2
+        c * exp(x / 2) - x - 2
     ),
     Function(
         y - 2 * x / y,
-        sqrt(C * exp(2 * x) + 2 * x + 1)
+        sqrt(c * exp(2 * x) + 2 * x + 1)
     ),
     Function(
         x + y,
-        C * exp(x) - x - 1
+        c * exp(x) - x - 1
     ),
     Function(
-        0,
-        C
+        Add(0 * x, 0 * y),
+        Add(0 * x, c)
     )
 ]
 
 
 def calculate_const(f, _x, _y):
-    cs = solve(f.subs(x, _x), C)
+    cs = solve(Add(f.subs(x, _x), -_y), c)
     if len(cs) == 0:
         raise Exception("Condition can't be satisfied")
-    c = solve(f.subs(x, _x), C)[0] + _y
-    return f.subs(C, c)
+    _c = cs[0]
+    return f.subs(c, _c)

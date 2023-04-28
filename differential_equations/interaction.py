@@ -43,14 +43,14 @@ def run():
         fun = get_function()
         a, b = get_ranges()
         y_a = get_condition(a)
-        fun = Function(
-            fun.test, calculate_const(fun.solved, a, y_a)
-        )
         print(fun)
         # TODO: replace const
-        x_euler, y_euler = solver.solve(fun.test, a, b, a, y_a, err, 0.2)
-        print(x_euler)
-        print(y_euler)
-        plt.plot(lambdify('x', fun.solved), a, b, x_euler, y_euler)
+        x_euler, y_euler = solver.solve(lambdify(['x', 'y'], fun.test), b, a, y_a, err)
+        # print(x_euler)
+        # print(y_euler)
+
+        condition_solved = calculate_const(fun.solved, a, y_a)
+        print(condition_solved)
+        plt.plot(lambdify('x', condition_solved), a, b, x_euler, y_euler)
     # except Exception as ex:
     #    print(ex.__str__())

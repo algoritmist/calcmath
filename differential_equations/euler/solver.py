@@ -1,12 +1,11 @@
 
-def solve(f, a, b, x0, y0, eps, step=None):
+def solve(f, b, x0, y0, h):
     xs = [x0]
     ys = [y0]
 
-    h = eps / (b - a) if step is None else step
     x, y = x0, y0
     while x < b:
-        y += h * f.subs([('x', x), ('y', y)])
+        y += h * f(x, y)
         x += h
         xs.append(x)
         ys.append(y)
