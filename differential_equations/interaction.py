@@ -38,19 +38,14 @@ def program_info():
 def run():
     print(program_info())
     while True:
-        # try:
-        err = get_error()
-        fun = get_function()
-        a, b = get_ranges()
-        y_a = get_condition(a)
-        print(fun)
-        # TODO: replace const
-        x_euler, y_euler = solver.solve(lambdify(['x', 'y'], fun.test), b, a, y_a, err)
-        # print(x_euler)
-        # print(y_euler)
+        try:
+            err = get_error()
+            fun = get_function()
+            a, b = get_ranges()
+            y_a = get_condition(a)
+            x_euler, y_euler = solver.solve(lambdify(['x', 'y'], fun.test), b, a, y_a, err)
 
-        condition_solved = calculate_const(fun.solved, a, y_a)
-        print(condition_solved)
-        plt.plot(lambdify('x', condition_solved), a, b, x_euler, y_euler)
-    # except Exception as ex:
-    #    print(ex.__str__())
+            condition_solved = calculate_const(fun.solved, a, y_a)
+            plt.plot(lambdify('x', condition_solved), a, b, x_euler, y_euler)
+        except Exception as ex:
+            print(ex.__str__())
