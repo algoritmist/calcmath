@@ -9,5 +9,7 @@ Source code for spring computational math labs:
     - Simpson's method
 4. Interpolation
     - Lagrange's method
+5. Differential equations
+    - Newton's method
 ## Running and testing
 You need ```python 3.10``` and ```venv``` to run the code and ```jupyter-notebook``` to run tests

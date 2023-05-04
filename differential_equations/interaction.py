@@ -19,7 +19,7 @@ def get_function():
     print("Choose function from list above")
 
     for i, f in enumerate(functions):
-        print(f"{i + 1}. y' = {f}")
+        print(f"{i + 1}. y' = {f.test}")
     i = int(input())
     if 1 <= i <= len(functions):
         return functions[i - 1]
